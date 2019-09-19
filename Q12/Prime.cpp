@@ -13,7 +13,7 @@ int iPrime(){
        return 0;
     }
     else{
-       for(int iCounter=2;iCounter<iNum;iCounter++){
+       for(register int iCounter=2;iCounter<iNum;iCounter++){
            if(iNum%iCounter == 0)
            bMid = true;       
         }
