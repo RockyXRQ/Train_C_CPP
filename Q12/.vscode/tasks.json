@@ -7,11 +7,12 @@
             "type": "shell",
             "label": "g++", 
             "command": "D:\\Software\\MinGW\\bin\\gcc.exe",
-            "args": [
-                "-g",
+            "args": [ 
                 "${file}",
+                "${fileDirname}\\Prime.cpp",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-g"
             ],
             "options": {
                 "cwd": "D:\\Software\\MinGW\\bin"
