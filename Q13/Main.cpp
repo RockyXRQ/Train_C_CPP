@@ -1,11 +1,11 @@
 #include "Include_List.h"
 #include "GetName.h"
 
-struct Words_Malloc * Test1;
-
 int main(){
+    struct Words_Malloc * Test1;
     
     getName(Test1);
+    getName_Free(Test1);
 
     system("pause");
     
