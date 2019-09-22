@@ -1,3 +1,5 @@
+/* GetName.h */
+
 #ifndef _STRUCT_MALLOC_TEST_H_
 #define _STRUCT_MALLOC_TEST_H_
 
