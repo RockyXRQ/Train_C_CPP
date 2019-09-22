@@ -4,7 +4,7 @@
 #include "GetName.h"
 
 int main(){
-    struct Words_Malloc * Test1 = (struct Words_Malloc*)malloc(40);
+    struct Words_Malloc * Test1 = (struct Words_Malloc*)malloc(2*sizeof(char*));
     
     getName(Test1);
     getName_Free(Test1);
