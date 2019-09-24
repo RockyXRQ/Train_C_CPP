@@ -20,13 +20,13 @@ void song_info_collection(){
 
        current->next = NULL;
        strcpy(current->name,input);
-       printf("请输入您对本歌曲的评价：");
+       printf("请输入您对本歌曲的评价：(1-10)");
        scanf("%d",&current->rating);
        
        while(getchar()!='\n')
        continue;
 
-       printf("请输入下一个歌曲的名字(若不输入请按回车结束)");
+       printf("请输入下一个歌曲的名字(若不输入请按回车结束)：");
        prev = current;
    }
 }
@@ -46,11 +46,12 @@ void song_list_print(){
 
 void song_list_free(){
     current = head;
+    struct song* temp_str_p;
     while(current!=NULL){
-        current = head;
-        head = current->next;
-        free(current->next);
+        temp_str_p = current->next;
+        free(current->name);
         free(current);
+        current = temp_str_p;
     }
     printf("结束···");
 }
