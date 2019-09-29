@@ -7,12 +7,12 @@ register char sex;
 printf("请输入您的身高:");
 scanf("%f",&height);
 printf("请输入您的性别:");
-scanf("%c",&sex);
+scanf(" %c",&sex);
 if(sex=='B')
 std_weight=(height-100)*0.9;
 else if(sex=='G')
 std_weight=(height-100)*0.9-2.5;
-printf("请输入您的体重");
+printf("请输入您的体重:");
 scanf("%f",&weight);
 if(weight<0.8*std_weight)
 printf("您属于超瘦");
