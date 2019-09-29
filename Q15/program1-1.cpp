@@ -8,5 +8,5 @@ int main()
    sum=a+b;                  //进行a+b运算，把结果存放在变量sum中
    printf("sum is: %d\n",sum);   //输出结果。d表示用十进制整数输出 
    system("pause"); 
-   return 1.2;    
+   return 1;    
 }
