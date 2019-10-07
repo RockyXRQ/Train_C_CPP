@@ -18,4 +18,5 @@ int use;
     printf("预计到达公司的时间为:%02d:%02d",hour,min);     
     system("pause");                  
     fclose(fp);
+    return 0;
 }
