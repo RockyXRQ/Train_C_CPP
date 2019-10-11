@@ -3,16 +3,19 @@
 
 class Students{
     public:
-        char *name;
-        char *profileNum;
-        char *studentNum;
-        char *academy;
-        char *major;
+        char name[20];
+        char profileNum[20];
+        char studentNum[20];
+        char academy[20];
+        char major[20];
+
+        bool isTermFin;
+        bool isSubChoose;
+
+        bool isAllFin();
+        void init();
 
         Students *next;
-        
-        void init();
-        void printInfo();
 
 };
 
