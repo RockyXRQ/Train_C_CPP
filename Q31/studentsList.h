@@ -1,4 +1,4 @@
-#ifdef STUDENTS_LIST_H_
+#ifndef STUDENTS_LIST_H_
 #define STUDENTS_LIST_H_
 
 #include "studentsClass.h"
