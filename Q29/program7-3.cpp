@@ -28,8 +28,8 @@ float getTax(register float yield){
      else{
         fund+=yield*rateList[count];
         break;
-    }
-  }
+      }
+   }
  return fund;
  }
 
