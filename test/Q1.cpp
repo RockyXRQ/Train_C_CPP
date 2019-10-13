@@ -3,9 +3,13 @@
 #include<string.h>
 
 int main(){
-char a[5];
-printf("%d",strlen(a));
+int a=0,i=1;
+a=++i;
+i=1;
+printf("%d\n",a);
+a=i++;
+i=1;
+printf("%d\n",a);
 system("pause");
 return 0 ;
-
 }

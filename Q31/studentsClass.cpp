@@ -14,13 +14,13 @@ void Students::init(){
     scanf("%s",academy);
     printf("请输入您的专业信息：");
     scanf("%s",major);
-    printf("您是否已经选课（1/0）");
     
+    printf("您是否已经选课（1/0）");
     scanf("%d",&bool1);
     if(bool1==1)
         isSubChoose=true;
-    printf("您本学期是否结束（1/0）");
     
+    printf("您本学期是否结束（1/0）");
     scanf("%d",&bool2);
     if(bool2==1)
         isTermFin=true;
@@ -28,4 +28,4 @@ void Students::init(){
 
 bool Students::isAllFin(){
     return strlen(name) && strlen(profileNum) &&strlen(studentNum) \
-           && strlen(academy) && strlen(major) && isTermFin && isSubChoose;
+    && strlen(academy) && strlen(major) && isTermFin && isSubChoose;

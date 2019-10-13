@@ -6,18 +6,17 @@
 class StudentsList{
     public:
         Students *head;
-        int listLen;
+        int listLen=0;
 
         StudentsList();
-
+  
         void clearList();
         void listPrintByName(char *name);
         void listTraverse();
         
         bool isListEmpty();
-        bool listInsertTail(Students *students);
-        bool listSearchByName(char *name);
-        bool ListDeleteByName(char *name,Students *students);   
+        bool listInsertTail();
+        bool listSearchByName();  
 };
 
 #endif

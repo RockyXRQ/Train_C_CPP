@@ -8,9 +8,10 @@ class Students{
         char studentNum[20];
         char academy[20];
         char major[20];
+        char finDate[20];
 
-        bool isTermFin;
-        bool isSubChoose;
+        bool isTermFin=false;
+        bool isSubChoose=false;
 
         bool isAllFin();
         void init();
