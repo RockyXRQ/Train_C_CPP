@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-int main()
-{
+int main(){
     register float dailyMark=0,finalMark=0;
     
     FILE* score;
