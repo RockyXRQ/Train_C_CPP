@@ -20,7 +20,7 @@ float getTax(register float yield){
  register int count=0;
  register float fund=0;
  while(1){
-     if(yield-rangeList[count]>0&&count<=1){
+     if(yield-rangeList[count]>0 && count<=1){
         fund+=rangeList[count]*rateList[count];
         yield-=rangeList[count];
         count++;
