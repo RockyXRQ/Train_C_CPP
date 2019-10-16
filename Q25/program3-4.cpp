@@ -1,36 +1,36 @@
-#include "stdio.h"
+#include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+
+void bmiTest(float);
 
 int main(){   
-register float height,weight,std_weight;
-register char sex;
-printf("请输入您的身高:");
+register float height,weight,bmi;
+
+printf("请输入您的身高:(以米为单位）");
 scanf("%f",&height);
-printf("请输入您的性别:");
-scanf(" %c",&sex);
-if(sex=='B')
-std_weight=(height-100)*0.9;
-else if(sex=='G')
-std_weight=(height-100)*0.9-2.5;
-printf("请输入您的体重:");
+printf("请输入您的体重:(以千克为单位)");
 scanf("%f",&weight);
-if(weight<0.8*std_weight)
-printf("您属于超瘦");
-else if(weight<0.9*std_weight&&weight>0.8*std_weight)
-printf("您属于偏瘦");
-else if(weight==std_weight*1.1)
-printf("您属于正常体重");
-else if(weight>std_weight*1.1&&weight<std_weight*1.2)
-printf("您属于超重");
-else if(weight>std_weight*1.2&&weight<std_weight*1.3)
-printf("您属于轻度肥胖");
-else if(weight>std_weight*1.3&&weight<std_weight*1.5)
-printf("您属于中度肥胖");
-else if(weight>std_weight*1.5)
-printf("您属于重度肥胖");
-else
-printf("您属于标准体重");
-printf("\n");
+
+bmiTest(float(weight/pow(height,2)));
+
 system("pause");
 return 0;
 }
+
+void bmiTest(float bmi){
+    printf("您的BMI值为：%.2f\n",bmi);
+    if(bmi<18.5)
+        printf("您属于偏瘦。\n");
+    else if(bmi>=18.5&&bmi<25)
+        printf("您属于正常。\n");
+    else if(bmi>=25&&bmi<30)
+        printf("您属于偏胖。\n");
+    else if(bmi>=30&&bmi<35)
+        printf("您属于肥胖。\n");
+    else if(bmi>=35&&bmi<40)
+        printf("您属于重度肥胖。\n");
+    else if(bmi>=40)
+        printf("您属于极重度肥胖。\n");
+}
+
