@@ -1,0 +1,24 @@
+
+{
+
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "g++", 
+            "command": "D:\\Software\\MinGW\\bin\\g++.exe",
+            "args": [
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-g"
+            ],
+            "options": {
+                "cwd": "D:\\Software\\MinGW\\bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ]
+}
