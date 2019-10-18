@@ -32,10 +32,11 @@ void mainUI(){
   scanf("%d",&objSwitch);
   if(objSwitch==1||objSwitch==2)
     pocketSwitch()();
-  else
+  else{
     printf("Ñ¡Ôñ´íÎó£¡");
     system("pause");
     exit(0);
+  }
 }
 
 void userInit(){
