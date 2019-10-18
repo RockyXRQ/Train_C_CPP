@@ -4,6 +4,7 @@
 #include <time.h>
 
 typedef void(*pocketFunc)();
+
 void normalPocket(),luckyPocket(),wordPocket();
 pocketFunc pocketSwitch();
 
