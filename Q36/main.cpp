@@ -2,49 +2,89 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <math.h>
 
-void pocketSwitch(),normalPocket(),luckyPocket(),wordPocket();
-void (*pocketFunc)();
+typedef void(*pocketFunc)();
+
+struct User{
+  float changeBlc=0;
+  float bankBlc=0;
+}user;
+
+void normalPocket();
+void luckyPocket();
+void wordPocket();
+void mainUI();
+void userInit();
+pocketFunc pocketSwitch();
 
 int main(){
-
-pocketSwitch();
-pocketFunc();
+mainUI();
 
 system("pause");
 return 0;
 }
 
-void pocketSwitch(){
+void mainUI(){
+  int objSwitch=0;
+  userInit();
+  printf("ÇëÎÊÄúÒªÏòË­·¢ºì°üÄØ£¿£¨¢ÙºÃÓÑ ¢ÚºÃÓÑÈº£©");
+  scanf("%d",&objSwitch);
+  if(objSwitch==1||objSwitch==2)
+    pocketSwitch()();
+  else
+    printf("Ñ¡Ôñ´íÎó£¡");
+    system("pause");
+    exit(0);
+}
+
+void userInit(){
+  printf("ÇëÊäÈëÄúµÄÁãÇ®Óà¶î£º");
+  scanf("%f",&user.changeBlc);
+  printf("ÇëÊäÈëÄúµÄÒøĞĞ¿¨Óà¶î£º");
+  scanf("%f",&user.bankBlc);
+}
+
+pocketFunc pocketSwitch(){
   register int choice=0;
-  printf("â‘  ä¸€èˆ¬çº¢åŒ…\nâ‘¡ æ‹¼æ‰‹æ°”çº¢åŒ…\nâ‘¢ å£ä»¤çº¢åŒ…\nè¯·é€‰æ‹©æ‚¨è¦å‘é€çš„çº¢åŒ…ç±»å‹ï¼š");
+  printf("\n¢Ù Ò»°ãºì°ü\n¢Ú Æ´ÊÖÆøºì°ü\n¢Û ¿ÚÁîºì°ü\nÇëÑ¡ÔñÄúÒª·¢ËÍµÄºì°üÀàĞÍ£º");
   scanf("%d",&choice);
-    switch(choice){
-      case 1:pocketFunc = normalPocket;
-             break;
-      case 2:pocketFunc = luckyPocket;
-             break;
-      case 3:pocketFunc = wordPocket;
-             break;
-      default:printf("è¾“å…¥é”™è¯¯ã€‚");
-              system("pause");
-              exit(0);
-              break;
+    if(choice==1)
+      return normalPocket;
+    else if(choice==2)
+      return luckyPocket;
+    else if(choice==3)
+      return wordPocket;
+    else{
+      printf("ÊäÈë´íÎó£¡");
+      system("pause");
+      exit(0);
     }
   }
 
 void normalPocket(){
-  register float  money=0;
-  register int    count=0;
+  float  money=0;
+  int    count=0;
+  char   sntnce[20];
   
-  printf("è¯·è¾“å…¥æ‚¨è¦å‘é€çš„é‡‘é¢ï¼š");
+  printf("ÇëÊäÈëÄúÒª·¢ËÍµÄ½ğ¶î£º");
   scanf("%f",&money);
-  printf("è¯·è¾“å…¥æ‚¨è¦å‘é€çš„çº¢åŒ…ä¸ªæ•°ï¼š");
+  if(money>user.bankBlc && money>user.changeBlc){
+    printf("Óà¶î²»×ã,ÎŞ·¨·¢ËÍºì°ü£¡");
+    system("pause");
+    exit(0);
+  }
+  printf("ÇëÊäÈëÄúÒª·¢ËÍµÄºì°ü¸öÊı£º");
   scanf("%d",&count);
   const    int orgCount=count;
   const    int orgMoney=money;
-  printf("å‡ ä¸ªçº¢åŒ…çš„é‡‘é¢åˆ†åˆ«ä¸ºï¼š");
+  printf("ÇëÊäÈëÒ»Ìõ×£¸£Óï£º");
+  scanf("%s",sntnce);
+  if(fabs(money-6.66)<0.00001)
+    strcpy(sntnce,"ÁùÁù´óË³");
+  printf("\n×£¸£Óï£º%s\n",sntnce);
   
+  printf("ºì°üµÄ½ğ¶î·Ö±ğÎª£º");
   while(count>1){
     printf(" %.2f",(float)orgMoney/(float)orgCount);
     money-=orgMoney/orgCount;
@@ -54,18 +94,31 @@ void normalPocket(){
 }
 
 void luckyPocket(){
-  register float  money=0;
-  register int    count=0;
+  float  money=0;
+  int    count=0;
+  char   sntnce[20];
   
-  printf("è¯·è¾“å…¥æ‚¨è¦å‘é€çš„é‡‘é¢ï¼š");
+  printf("ÇëÊäÈëÄúÒª·¢ËÍµÄ½ğ¶î£º");
   scanf("%f",&money);
-  printf("è¯·è¾“å…¥æ‚¨è¦å‘é€çš„çº¢åŒ…ä¸ªæ•°ï¼š");
-  scanf("%d",&count);
-  printf("å‡ ä¸ªçº¢åŒ…çš„é‡‘é¢åˆ†åˆ«ä¸ºï¼š");
+  if(money>user.bankBlc && money>user.changeBlc){
+    printf("Óà¶î²»×ã,ÎŞ·¨·¢ËÍºì°ü£¡");
+    system("pause");
+    exit(0);
+  }
   
+  printf("ÇëÊäÈëÄúÒª·¢ËÍµÄºì°ü¸öÊı£º");
+  scanf("%d",&count);
+  printf("ÇëÊäÈëÒ»Ìõ×£¸£Óï£º");
+  scanf("%s",sntnce);
+  if(fabs(money-6.66)<0.00001)
+    strcpy(sntnce,"ÁùÁù´óË³");
+  
+  printf("\n×£¸£Óï£º%s\n",sntnce);
+  
+  printf("ºì°üµÄ½ğ¶î·Ö±ğÎª£º");
   while(count>1){
     srand((unsigned int)time(NULL));
-    register float temp = float(rand()%((int)money-count));
+    register float temp = float(rand()%((int)money-count)+0.01);
     printf(" %.2f",temp);
     money-=temp;
     count-=1;
@@ -74,29 +127,41 @@ void luckyPocket(){
 }
 
 void wordPocket(){
-  register float money=0;
-  register int   count=0;
+   float money=0;
+   int   count=0;
+   char  sntnce[20];
   char* word = (char*)malloc(21);
   char* wordCmp = (char*)malloc(21);
-  printf("è¯·è¾“å…¥æ‚¨è¦å‘é€çš„é‡‘é¢ï¼š");
+  printf("ÇëÊäÈëÄúÒª·¢ËÍµÄ½ğ¶î£º");
   scanf("%f",&money);
-  printf("è¯·è¾“å…¥æ‚¨è¦å‘é€çš„çº¢åŒ…ä¸ªæ•°ï¼š");
+  if(money>user.bankBlc && money>user.changeBlc){
+    printf("Óà¶î²»×ã,ÎŞ·¨·¢ËÍºì°ü£¡");
+    system("pause");
+    exit(0);
+  }
+  printf("ÇëÊäÈëÄúÒª·¢ËÍµÄºì°ü¸öÊı£º");
   scanf("%d",&count);
-  printf("è¯·è¾“å…¥æ‚¨è¦è®¾ç½®çš„å£ä»¤ï¼š(ä¸å¯å¤šäº20ä¸ªå­—ç¬¦ï¼‰");
+  printf("ÇëÊäÈëÄúÒªÉèÖÃµÄ¿ÚÁî£º(²»¿É¶àÓÚ20¸ö×Ö·û£©");
   scanf("%s",word);
+  
+  printf("ÇëÊäÈëÒ»Ìõ×£¸£Óï£º");
+  scanf("%s",sntnce);
+  if(fabs(money-6.66)<0.00001)
+    strcpy(sntnce,"ÁùÁù´óË³");
+  printf("\n×£¸£Óï£º%s\n",sntnce);
 
   while(count>1){
-    printf("è¯·è¾“å…¥å£ä»¤ä»¥é¢†å–çº¢åŒ…:");
+    printf("ÇëÊäÈë¿ÚÁîÒÔÁìÈ¡ºì°ü:");
     scanf("%s",wordCmp);
     if(strcmp(word,wordCmp)==0){
       srand((unsigned int)time(NULL));
-    register float temp = float(rand()%((int)money-count));
+    register float temp = float(rand()%((int)money-count)+0.01);
     printf(" %.2f",temp);
     money-=temp;
     count-=1;
     }
     else
-      printf("å£ä»¤é”™è¯¯ï¼ä¸å¯é¢†å–çº¢åŒ…ï¼");
+      printf("¿ÚÁî´íÎó£¡²»¿ÉÁìÈ¡ºì°ü£¡");
   }
   printf(" %.2f",money);
 }
