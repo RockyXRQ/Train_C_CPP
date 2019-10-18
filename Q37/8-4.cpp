@@ -3,17 +3,17 @@
 #include <string.h>
 #include <time.h>
 
-void *pocketSwitch(),normalPocket(),luckyPocket(),wordPocket();
-void (*pocketFunc)();
+typedef void(*pocketFunc)();
+void normalPocket(),luckyPocket(),wordPocket();
+pocketFunc pocketSwitch();
 
 int main(){
-pocketFunc=pocketSwitch();
-pocketFunc();
+pocketSwitch()();
 system("pause");
 return 0;
 }
 
-void *pocketSwitch(){
+pocketFunc pocketSwitch(){
   register int choice=0;
   printf("① 一般红包\n② 拼手气红包\n③ 口令红包\n请选择您要发送的红包类型：");
   scanf("%d",&choice);
@@ -40,7 +40,7 @@ void normalPocket(){
   printf("请输入您要发送的红包个数：");
   scanf("%d",&count);
   const    int orgCount=count;
-  const    int orgMoney=money;
+  const    float orgMoney=money;
   printf("几个红包的金额分别为：");
   
   while(count>1){
