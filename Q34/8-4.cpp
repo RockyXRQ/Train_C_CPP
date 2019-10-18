@@ -3,33 +3,32 @@
 #include <string.h>
 #include <time.h>
 
-void pocketSwitch(),normalPocket(),luckyPocket(),wordPocket();
-void (*pocketFunc)();
+typedef void(*pocketFunc)();
 
+void normalPocket(),luckyPocket(),wordPocket();
+
+pocketFunc pocketSwitch();
 int main(){
-
-pocketSwitch();
-pocketFunc();
+pocketSwitch()();
 
 system("pause");
 return 0;
 }
 
-void pocketSwitch(){
+pocketFunc pocketSwitch(){
   register int choice=0;
   printf("① 一般红包\n② 拼手气红包\n③ 口令红包\n请选择您要发送的红包类型：");
   scanf("%d",&choice);
-    switch(choice){
-      case 1:pocketFunc = normalPocket;
-             break;
-      case 2:pocketFunc = luckyPocket;
-             break;
-      case 3:pocketFunc = wordPocket;
-             break;
-      default:printf("输入错误。");
-              system("pause");
-              exit(0);
-              break;
+    if(choice==1)
+      return normalPocket;
+    else if(choice==2)
+      return luckyPocket;
+    else if(choice==3)
+      return wordPocket;
+    else{
+      printf("输入错误！");
+      system("pause");
+      exit(0);
     }
   }
 
