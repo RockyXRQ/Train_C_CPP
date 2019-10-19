@@ -63,7 +63,7 @@ void luckyPocket(){
   printf("几个红包的金额分别为：");
   
   while(count>1){
-    srand((unsigned int)time(NULL));
+    srand((unsigned)time(NULL));
     register float temp = float(rand()%((int)money-count));
     printf(" %.2f",temp);
     money-=temp;
@@ -88,7 +88,7 @@ void wordPocket(){
     printf("请输入口令以领取红包:");
     scanf("%s",wordCmp);
     if(strcmp(word,wordCmp)==0){
-      srand((unsigned int)time(NULL));
+      srand((unsigned)time(NULL));
     register float temp = float(rand()%((int)money-count));
     printf(" %.2f",temp);
     money-=temp;

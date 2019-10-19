@@ -30,8 +30,11 @@ void mainUI(){
   userInit();
   printf("请问您要向谁发红包呢？（①好友 ②好友群）");
   scanf("%d",&objSwitch);
-  if(objSwitch==1||objSwitch==2)
+  if(objSwitch==1)
+    normalPocket();
+  else if(objSwitch==2){
     pocketSwitch()();
+  } 
   else{
     printf("选择错误！");
     system("pause");
