@@ -7,9 +7,9 @@
 typedef void(*pocketFunc)();
 
 struct User{
-  float changeBlc=0;
-  float bankBlc=0;
-}user;
+  float changeBlc;
+  float bankBlc;
+}user{0,0};
 
 void normalPocket();
 void luckyPocket();
