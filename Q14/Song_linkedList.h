@@ -5,10 +5,10 @@
 
 #include "Include_list.h"
 
-struct song{
-    char * name;
+struct song {
+    char* name;
     int rating;
-    struct song * next;
+    struct song* next;
 };
 
 void song_info_collection();
