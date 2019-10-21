@@ -82,8 +82,8 @@ void NormalPocket(){
   }
   printf("请输入您要发送的红包个数：");
   scanf("%d",&count);
-  const    int orgCount=count;
-  const    int orgMoney=money;
+  const int orgCount=count;
+  const int orgMoney=money;
   printf("请输入一条祝福语：");
   scanf("%s",sntnce);
   if(fabs(money-6.66)<0.00001)

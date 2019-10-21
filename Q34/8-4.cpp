@@ -2,12 +2,18 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <math.h>
 
 typedef void(*pocketFunc)();
 
-void normalPocket(),luckyPocket(),wordPocket();
+void normalPocket();
+void luckyPocket();
+void wordPocket();
+
+double GetRandNum(int,int,int,int);
 
 pocketFunc pocketSwitch();
+
 int main(){
 pocketSwitch()();
 
@@ -16,7 +22,7 @@ return 0;
 }
 
 pocketFunc pocketSwitch(){
-  register int choice=0;
+  int choice=0;
   printf("① 一般红包\n② 拼手气红包\n③ 口令红包\n请选择您要发送的红包类型：");
   scanf("%d",&choice);
     if(choice==1)
@@ -33,15 +39,15 @@ pocketFunc pocketSwitch(){
   }
 
 void normalPocket(){
-  register float  money=0;
-  register int    count=0;
+  float  money=0;
+  int    count=0;
   
   printf("请输入您要发送的金额：");
   scanf("%f",&money);
   printf("请输入您要发送的红包个数：");
   scanf("%d",&count);
-  const    int orgCount=count;
-  const    int orgMoney=money;
+  const int orgCount=count;
+  const int orgMoney=money;
   printf("几个红包的金额分别为：");
   
   while(count>1){
@@ -53,8 +59,8 @@ void normalPocket(){
 }
 
 void luckyPocket(){
-  register float  money=0;
-  register int    count=0;
+  float  money=0;
+  int    count=0;
   
   printf("请输入您要发送的金额：");
   scanf("%f",&money);
@@ -64,7 +70,7 @@ void luckyPocket(){
   
   while(count>1){
     srand((unsigned)time(NULL));
-    register float temp = float(rand()%((int)money-count));
+    register double temp=GetRandNum(0,money,count,2);
     printf(" %.2f",temp);
     money-=temp;
     count-=1;
@@ -89,7 +95,7 @@ void wordPocket(){
     scanf("%s",wordCmp);
     if(strcmp(word,wordCmp)==0){
       srand((unsigned)time(NULL));
-    register float temp = float(rand()%((int)money-count));
+    register double temp=GetRandNum(0,money,count,2);
     printf(" %.2f",temp);
     money-=temp;
     count-=1;
@@ -98,4 +104,10 @@ void wordPocket(){
       printf("口令错误！不可领取红包！");
   }
   printf(" %.2f",money);
+}
+
+double GetRandNum(int rangeLow,int rangeHigh,int times,int pit){
+  srand((unsigned)time(NULL));
+  register double temp = (rand()%(rangeHigh*(int)pow(10,pit)-rangeLow*(int)pow(10,pit))+rangeLow*(int)pow(10,pit))/pow(10,pit);
+  return temp-times*(1/pow(10,2));
 }
