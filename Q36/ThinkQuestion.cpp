@@ -91,7 +91,7 @@ void NormalPocket() {
 
     printf("红包的金额分别为：");
     while (count > 1) {
-        printf(" %.2f", (float)orgMoney / (float)orgCount);
+        printf(" %.2f", (float) orgMoney / (float) orgCount);
         money -= orgMoney / orgCount;
         count -= 1;
     }
@@ -133,8 +133,8 @@ void WordPocket() {
     float money = 0;
     int count = 0;
     char sntnce[20];
-    char* word = (char*)malloc(21);
-    char* wordCmp = (char*)malloc(21);
+    char* word = (char*) malloc(21);
+    char* wordCmp = (char*) malloc(21);
     printf("请输入您要发送的金额：");
     scanf("%f", &money);
     if (money > user.bankBlc && money > user.changeBlc) {
@@ -167,10 +167,10 @@ void WordPocket() {
 }
 
 double GetRandNum(int rangeLow, int rangeHigh, int times, int pit) {
-    srand((unsigned)time(NULL));
-    register double temp = (rand() % (rangeHigh * (int)pow(10, pit) -
-                                      rangeLow * (int)pow(10, pit)) +
-                            rangeLow * (int)pow(10, pit)) /
+    srand((unsigned) time(NULL));
+    register double temp = (rand() % (rangeHigh * (int) pow(10, pit) -
+                                      rangeLow * (int) pow(10, pit)) +
+                            rangeLow * (int) pow(10, pit)) /
                            pow(10, pit);
     return temp - times * (1 / pow(10, 2));
 }
