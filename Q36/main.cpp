@@ -11,29 +11,32 @@ struct User{
   float bankBlc;
 }user{0,0};
 
-void normalPocket();
-void luckyPocket();
-void wordPocket();
-void mainUI();
-void userInit();
-pocketFunc pocketSwitch();
+void NormalPocket();
+void LuckyPocket();
+void WordPocket();
+void MainUI();
+void UserInit();
+
+double GetRandNum(int,int,int,int);
+
+pocketFunc PocketSwitch();
 
 int main(){
-mainUI();
+MainUI();
 
 system("pause");
 return 0;
 }
 
-void mainUI(){
+void MainUI(){
   int objSwitch=0;
-  userInit();
+  UserInit();
   printf("请问您要向谁发红包呢？（①好友 ②好友群）");
   scanf("%d",&objSwitch);
   if(objSwitch==1)
-    normalPocket();
+    NormalPocket();
   else if(objSwitch==2){
-    pocketSwitch()();
+    PocketSwitch()();
   } 
   else{
     printf("选择错误！");
@@ -42,35 +45,34 @@ void mainUI(){
   }
 }
 
-void userInit(){
+void UserInit(){
   printf("请输入您的零钱余额：");
   scanf("%f",&user.changeBlc);
   printf("请输入您的银行卡余额：");
   scanf("%f",&user.bankBlc);
 }
 
-pocketFunc pocketSwitch(){
+pocketFunc PocketSwitch(){
   register int choice=0;
   printf("\n① 一般红包\n② 拼手气红包\n③ 口令红包\n请选择您要发送的红包类型：");
   scanf("%d",&choice);
-    if(choice==1)
-      return normalPocket;
-    else if(choice==2)
-      return luckyPocket;
-    else if(choice==3)
-      return wordPocket;
-    else{
-      printf("输入错误！");
-      system("pause");
-      exit(0);
-    }
+  if(choice==1)
+    return NormalPocket;
+  else if(choice==2)
+    return LuckyPocket;
+  else if(choice==3)
+    return WordPocket;
+  else{
+    printf("输入错误！");
+    system("pause");
+    exit(0);
   }
+}
 
-void normalPocket(){
+void NormalPocket(){
   float  money=0;
   int    count=0;
   char   sntnce[20];
-  
   printf("请输入您要发送的金额：");
   scanf("%f",&money);
   if(money>user.bankBlc && money>user.changeBlc){
@@ -97,7 +99,7 @@ void normalPocket(){
   printf(" %.2f",money);
 }
 
-void luckyPocket(){
+void LuckyPocket(){
   float  money=0;
   int    count=0;
   char   sntnce[20];
@@ -121,8 +123,7 @@ void luckyPocket(){
   
   printf("红包的金额分别为：");
   while(count>1){
-    srand((unsigned int)time(NULL));
-    register float temp = float(rand()%((int)money-count)+0.01);
+    register double temp=GetRandNum(0,money,count,2);
     printf(" %.2f",temp);
     money-=temp;
     count-=1;
@@ -130,10 +131,10 @@ void luckyPocket(){
   printf(" %.2f",money);
 }
 
-void wordPocket(){
-   float money=0;
-   int   count=0;
-   char  sntnce[20];
+void WordPocket(){
+  float money=0;
+  int   count=0;
+  char  sntnce[20];
   char* word = (char*)malloc(21);
   char* wordCmp = (char*)malloc(21);
   printf("请输入您要发送的金额：");
@@ -158,14 +159,19 @@ void wordPocket(){
     printf("请输入口令以领取红包:");
     scanf("%s",wordCmp);
     if(strcmp(word,wordCmp)==0){
-      srand((unsigned int)time(NULL));
-    register float temp = float(rand()%((int)money-count)+0.01);
-    printf(" %.2f",temp);
-    money-=temp;
-    count-=1;
+      register double temp=GetRandNum(0,money,count,2);
+      printf(" %.2f",temp);
+      money-=temp;
+      count-=1;
     }
     else
       printf("口令错误！不可领取红包！");
   }
   printf(" %.2f",money);
+}
+
+double GetRandNum(int rangeLow,int rangeHigh,int times,int pit){
+  srand((unsigned)time(NULL));
+  register double temp = (rand()%(rangeHigh*(int)pow(10,pit)-rangeLow*(int)pow(10,pit))+rangeLow*(int)pow(10,pit))/pow(10,pit);
+  return temp-times*(1/pow(10,2));
 }
