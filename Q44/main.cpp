@@ -92,16 +92,24 @@ int main() {
                 price_std = PRICE_STD1 * num_std;
                 price_kid = PRICE_DCT1 * num_kid;
                 price_old = PRICE_DCT1 * num_old;
+                if (month == 6 & day == 1) {
+                    price_std *= 0.8;
+                }
                 price = price_std + price_kid + price_old;
             } else {
                 //高峰日票1日票合计
                 price_std = PRICE_STD2 * num_std;
                 price_kid = PRICE_DCT2 * num_kid;
                 price_old = PRICE_DCT2 * num_old;
+                if (month == 6 & day == 1) {
+                    price_std *= 0.8;
+                }
                 price = price_std + price_kid + price_old;
             }
-            //******************************************************************************************************
+            
             break;
+            //******************************************************************************************************
+            
         //计算2日票的门票价格
         case '2':
             //获取第二天平日或高峰日标志
@@ -123,8 +131,8 @@ int main() {
                 price_kid = PRICE_DCT_2_3 * num_kid;
                 price_old = PRICE_DCT_2_3 * num_old;
             }
-            //******************************************************************************************************
-            price = price_std + price_kid + price_old;
+                //******************************************************************************************************
+                price = price_std + price_kid + price_old;
             break;
         default:
             printf("选择错误！退出！\n");
