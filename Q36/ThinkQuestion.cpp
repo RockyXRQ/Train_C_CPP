@@ -170,7 +170,6 @@ double GetRandNum(int rangeLow, int rangeHigh, int times, int pit) {
     srand((unsigned) time(NULL));
     register double temp = (rand() % (rangeHigh * (int) pow(10, pit) -
                                       rangeLow * (int) pow(10, pit)) +
-                            rangeLow * (int) pow(10, pit)) /
-                           pow(10, pit);
+                            rangeLow * (int) pow(10, pit)) / pow(10, pit);
     return temp - times * (1 / pow(10, 2));
 }
