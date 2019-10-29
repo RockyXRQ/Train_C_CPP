@@ -3,15 +3,13 @@
 
 float salaryYield, getTax(register float yield);
 
-float *rangeList = (float[6]){1500, 3000, 4500, 26000, 20000, 25000};
-float *rateList = (float[7]){0.03, 0.1, 0.2, 0.25, 0.3, 0.35, 0.45};
+float *rangeList = (float[3]){3000, 2000, 2000};
+float *rateList = (float[4]){0.6, 0.7, 0.9, 1.2};
 
 int main() {
-    printf("请输入本月所用的工资：");
+    printf("请输入本月所用的电费：");
     scanf("%f", &salaryYield);
-    salaryYield -= 3500;
-    printf("您要缴纳的税费为：%.2f元", getTax(salaryYield));
-
+    printf("您要缴纳的费用为：%.2f元", getTax(salaryYield));
     system("pause");
     return 0;
 }

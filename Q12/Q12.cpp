@@ -4,6 +4,5 @@
 int main() {
     iPrime();
     system("pause");
-
     return 0;
 }
