@@ -24,8 +24,6 @@ int main() {
     }
 
     srand((unsigned)time(NULL));
-    a = (int *)malloc(sizeof(int) * i);
-    memset(a, -1, sizeof(a));
     while ((ch = getch()) != 'q') {
         if (flag == i) {
             printf("%s\n", "µãÃû½áÊø\n");
