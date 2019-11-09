@@ -8,10 +8,10 @@
             "label": "g++", 
             "command": "D:\\Software\\MinGW\\bin\\gcc.exe",
             "args": [
+                "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "-g"
+                "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
             "options": {
                 "cwd": "D:\\Software\\MinGW\\bin"
