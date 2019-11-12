@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 const unsigned int STRLEN = 10000;
+
 bool isPalindom(char*);
 
 int main() {
