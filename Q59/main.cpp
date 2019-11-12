@@ -3,13 +3,13 @@
 #include <string.h>
 const unsigned int STRLEN = 10000;
 
-bool isPalindom(char*);
+bool IsPalindom(char*);
 
 int main() {
     char* num = (char*) malloc(STRLEN);
     printf("请输入一个数进行判断:");
     scanf("%s", num);
-    if (isPalindom(num)) {
+    if (IsPalindom(num)) {
         printf("此数为回文数。\n");
     } else {
         printf("此数不为回文数。\n");
@@ -19,7 +19,7 @@ int main() {
     system("pause");
     return 0;
 }
-bool isPalindom(char* s) {
+bool IsPalindom(char* s) {
     register int head = 0;
     register int end = strlen(s) - 1;
     while (s[head]) {
