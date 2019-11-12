@@ -14,11 +14,11 @@ int main() {
     } else {
         printf("此数不为回文数。\n");
     }
-
     free(num);
     system("pause");
     return 0;
 }
+
 bool IsPalindom(char* s) {
     register int head = 0;
     register int end = strlen(s) - 1;
