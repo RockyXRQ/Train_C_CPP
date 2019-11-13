@@ -10,6 +10,7 @@ int GetLen(char*);
 bool IsSelfPower(char*);
 
 int main() {
+    printf("[eNumber5]\n");
     char name[10][30] = {"Single_number.txt", " ", "Daffodil_number.txt",
                          "Roses_number.txt", "Star_Number.txt"};
     srand((unsigned int) time(NULL));
