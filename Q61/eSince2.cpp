@@ -22,11 +22,11 @@ int GetLen(char* num) {
 
 bool IsSelfPower(char* num) {
     bool choice = false;
-    register int total = 0;
-    register int realNum = atoi(num);
+    register unsigned long long total = 0;
+    register unsigned long long realNum = atoll(num);
     register int len = GetLen(num);
     while (*num) {
-        total += (int) (pow(*num - '0', len) * 10 + 5) / 10;
+        total += (unsigned long long) (pow(*num - '0', len) * 10 + 5) / 10;
         num++;
     }
     return choice = (realNum == total) ? 1 : 0;

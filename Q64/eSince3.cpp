@@ -6,7 +6,7 @@
 
 const unsigned int STRLEN = 100;
 
-int getLen(char*);
+int GetLen(char*);
 bool IsSelfPower(char*);
 
 int main() {
@@ -21,7 +21,7 @@ int main() {
         itoa(rand(), tempNum, 10);
         if (IsSelfPower(tempNum)) {
             printf("%s\n", tempNum);
-            FILE* fp = fopen(name[getLen(tempNum) - 1], "a");
+            FILE* fp = fopen(name[GetLen(tempNum) - 1], "a");
             printf("%p\n", fp);
             fprintf(fp, "%s\n", tempNum);
             fclose(fp);
@@ -31,17 +31,17 @@ int main() {
     return 0;
 }
 
-int getLen(char* num) {
+int GetLen(char* num) {
     return strlen(num);
 }
 
 bool IsSelfPower(char* num) {
     bool choice = false;
-    register int total = 0;
-    register int realNum = atoi(num);
-    register int len = getLen(num);
+    register unsigned long long total = 0;
+    register unsigned long long realNum = atoll(num);
+    register int len = GetLen(num);
     while (*num) {
-        total += (int) (pow(*num - '0', len) * 10 + 5) / 10;
+        total += (unsigned long long) (pow(*num - '0', len) * 10 + 5) / 10;
         num++;
     }
     return choice = (realNum == total) ? 1 : 0;
