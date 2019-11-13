@@ -11,17 +11,20 @@ bool IsSelfPower(char*);
 
 int main() {
     char name[10][30] = {"Single_number.txt", " ", "Daffodil_number.txt",
-                    "Roses_number.txt", "Star_Number.txt"};
+                         "Roses_number.txt", "Star_Number.txt"};
     srand((unsigned int) time(NULL));
     printf("[eSince3]\n");
-    FILE* fp = fopen("Single_number.txt", "r");
     char tempNum[20];
     register int times = rand() % 200 + 1;
-    for (;;) {
+    printf("%d\n", times);
+    for (register int count = 0; count < times; count++) {
         itoa(rand(), tempNum, 10);
         if (IsSelfPower(tempNum)) {
+            printf("%s\n", tempNum);
+            FILE* fp = fopen(name[getLen(tempNum) - 1], "a");
             printf("%p\n", fp);
-            fprintf(fp,"%s",tempNum);
+            fprintf(fp, "%s\n", tempNum);
+            fclose(fp);
         }
     }
     system("pause");
