@@ -8,10 +8,17 @@ const unsigned int STRLEN = 100;
 
 int getLen(char*);
 bool IsSelfPower(char*);
-void UI();
 
 int main() {
-    UI();
+    int times = 0;
+    scanf("%d", &times);
+    for (register int count = 0; count < times; count++) {
+        char num[20];
+        scanf(" %s", num);
+        if (IsSelfPower(num)) {
+            printf("%s\n", num);
+        }
+    }
     system("pause");
     return 0;
 }
@@ -30,23 +37,4 @@ bool IsSelfPower(char* num) {
         num++;
     }
     return choice = (realNum == total) ? 1 : 0;
-}
-
-void UI() {
-    char choice;
-    char num[20];
-    while ((choice = getchar()) == ' ');
-    if (choice == 'S' || choice == 's') {
-        scanf("%s", num);
-        printf("此%d位自幂数是否存在：%d", getLen(num), IsSelfPower(num));
-    } else if (choice == 'H' || choice == 'h'){
-        printf("就判断自幂数呗！");
-    } else if (choice == 'Q' || choice == 'q'){
-        system("pause");
-        exit(0);
-    } else {
-        printf("输入错误！");
-        system("pause");
-        exit(0);
-    }
 }
