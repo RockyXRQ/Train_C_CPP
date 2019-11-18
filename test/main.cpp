@@ -1,5 +1,10 @@
 #include <stdio.h>
-int main(void) {
-    while (1) printf("Îä¾üÕÜ´óÔüÄĞ£¡");
+#include <stdlib.h>
+
+int main() {
+    int n = 1;
+    while (n++ <= 2) printf("\37");
+    system("pause");
     return 0;
 }
+

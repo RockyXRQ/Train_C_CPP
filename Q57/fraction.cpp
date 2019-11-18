@@ -3,22 +3,23 @@
 
 float getValue(int);
 
-int main(void) {
+int main() {
     register float total = 0;
-    for (int i = 1; i < 21;i++){
-        total += (getValue(i)/getValue(i+1));
+    for (register int count = 1; count < 21; ++count) {
+        total += getValue(count) / getValue(count + 1);
     }
-    printf("%.2f", total);
+    printf("%.2f\n", total);
     system("pause");
     return 0;
 }
 
-float getValue(int n){
-    if(n==1){
+float getValue(int n) {
+    if (n == 1) {
         return 1;
-    } else if (n == 2){
+    } else if (n == 2) {
         return 2;
-    }else{
+    } else {
         return getValue(n - 2) + getValue(n - 1);
     }
 }
+

@@ -4,7 +4,9 @@
 int FbncPrint(int);
 
 int main() {
-    for (int i = 1; i < 11; i++) printf("%d ", FbncPrint(i));
+    for (register int count = 1; count < 100; count++) {
+        printf("%d ", FbncPrint(count));
+    }
     system("pause");
     return 0;
 }
@@ -18,3 +20,4 @@ int FbncPrint(int n) {
         return FbncPrint(n - 1) + FbncPrint(n - 2);
     }
 }
+
