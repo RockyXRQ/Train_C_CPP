@@ -5,6 +5,7 @@
 
 const int WIDE = 30;
 const int HEIGHT = 30;
+const int FRUIT_DELAY = 6;
 
 const int UP = 80;
 const int DOWN = 72;
@@ -26,14 +27,14 @@ struct food {
 
 struct snake snakeHead;
 struct food apple;
-int len = 1;
+static int counter = 0;
+static int len = 1;
 
 bool IsEat() {
-    if (snakeHead.x == apple.x && snakeHead.y == apple.y) {
+    if (snakeHead.x == apple.x && snakeHead.y == apple.y)
         return true;
-    } else {
+    else
         return false;
-    }
 }
 
 bool IsSnake(int x, int y) {
@@ -45,12 +46,14 @@ bool IsSnake(int x, int y) {
     return false;
 }
 
-void FruitInit() {
-    srand((unsigned int) time(NULL));
-    do {
-        apple.x = rand() % (WIDE - 3) + 1;
-        apple.y = rand() % (HEIGHT - 3) + 1;
-    } while (!IsSnake(apple.x, apple.y));
+void FruitInit(int tempCounter) {
+    if (tempCounter == FRUIT_DELAY) {
+        srand((unsigned int) time(NULL));
+        do {
+            apple.x = rand() % (WIDE - 3) + 1;
+            apple.y = rand() % (HEIGHT - 3) + 1;
+        } while (!IsSnake(apple.x, apple.y));
+    }
 }
 
 bool IsFruit(int x, int y) {
@@ -69,6 +72,9 @@ void BodyAdd() {
     newBody->x = tempHead->x;
     newBody->y = tempHead->y;
     ++len;
+    apple.x = 0;
+    apple.y = 0;
+    counter = 0;
 }
 
 void SnakeInit() {
@@ -118,6 +124,7 @@ bool IsEnd() {
     if (snakeHead.x == 0 || snakeHead.x == WIDE - 1 || snakeHead.y == 0 ||
         snakeHead.y == HEIGHT - 1)
         return true;
+    if (len == (30 - 2) * (30 - 2)) return true;
     return false;
 }
 
@@ -133,7 +140,8 @@ void GetDirection() {
 
 bool PrintGame() {
     while (1) {
-        FruitInit();
+        printf("%d\n%d\n%d\n%d\n", apple.x, apple.y, counter, len);
+        FruitInit(counter);
         for (int mapY = 0; mapY < HEIGHT; mapY++) {
             for (int mapX = 0; mapX < WIDE; mapX++) {
                 if (mapY == 0 || mapY == HEIGHT - 1)
@@ -142,14 +150,15 @@ bool PrintGame() {
                     printf("¡õ");
                 else if (IsSnake(mapX, mapY))
                     printf("¡ö");
-                else if (IsFruit(mapX, mapY))
-                    printf("?");
-                else
+                else if (counter == FRUIT_DELAY && IsFruit(mapX, mapY)) {
+                    printf("¡ñ");
+                } else
                     printf("  ");
             }
             printf("\n");
         }
         if (IsEnd()) {
+            system("cls");
             printf("ÓÎÏ·½áÊø£¡\n");
             return 1;
         }
@@ -157,6 +166,7 @@ bool PrintGame() {
         SnakeInit();
         GetDirection();
         system("cls");
+        ++counter;
     }
 }
 
