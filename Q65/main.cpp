@@ -3,15 +3,15 @@
 #include <windows.h>
 #include <time.h>
 
-const int WIDE = 30;
-const int HEIGHT = 30;
-const int FRUIT_DELAY = 6;
+const int WIDE = 20;
+const int HEIGHT = 20;
+const int FRUIT_DELAY = 8;
 
 const int UP = 80;
 const int DOWN = 72;
 const int LEFT = 75;
 const int RIGHT = 77;
-const int DELAY = 0.03 * 1000;
+const int DELAY = 0.045 * 1000;
 
 int lastDirection = UP;
 
@@ -27,14 +27,13 @@ struct food {
     int x = 0;
     int y = 0;
 };
-struct snake snakeBodyC = {UP, WIDE / 2, HEIGHT / 2 + 3, NULL, NULL};
-struct snake snakeBodyB = {UP, WIDE / 2, HEIGHT / 2 + 2, NULL, &snakeBodyC};
+struct snake snakeBodyB = {UP, WIDE / 2, HEIGHT / 2 + 2, NULL, NULL};
 struct snake snakeBodyA = {UP, WIDE / 2, HEIGHT / 2 + 1, NULL, &snakeBodyB};
 struct snake snakeHead = {UP, WIDE / 2, HEIGHT / 2, NULL, &snakeBodyA};
 
 struct food apple;
 static int counter = 0;
-static int len = 4;
+static int len = 3;
 bool fruitSwitch = true;
 
 bool IsEat() {
@@ -143,7 +142,7 @@ void SnakeInit() {
 }
 bool IsEnd() {
     struct snake* tempHead = snakeHead.next;
-    while (tempHead != NULL) {
+    while (tempHead->next != NULL) {
         if (tempHead->x == snakeHead.x && tempHead->y == snakeHead.y)
             return true;
         tempHead = tempHead->next;
@@ -172,7 +171,6 @@ void GetDirection() {
 bool PrintGame() {
     snakeBodyA.head = &snakeHead;
     snakeBodyB.head = &snakeBodyA;
-    snakeBodyC.head = &snakeBodyB;
 
     while (1) {
         FruitInit(counter);
@@ -180,13 +178,13 @@ bool PrintGame() {
             printf("\t\t\t");
             for (int mapX = 0; mapX < WIDE; mapX++) {
                 if (mapY == 0 || mapY == HEIGHT - 1)
-                    printf("□");
+                    printf("·");
                 else if (mapX == 0 || mapX == HEIGHT - 1)
-                    printf("□");
+                    printf("·");
                 else if (IsSnake(mapX, mapY))
                     printf("■");
                 else if (fruitSwitch && IsFruit(mapX, mapY))
-                    printf("●");
+                    printf("○");
                 else
                     printf("  ");
             }
@@ -203,7 +201,7 @@ bool PrintGame() {
         }
         SnakeInit();
         GetDirection();
-        printf("\t\t\t分数：%d", len - 4);
+        printf("\t\t\t分数：%d", len - 3);
         system("cls");
         ++counter;
     }
