@@ -54,14 +54,16 @@ bool IsSnake(int x, int y) {
 }
 
 void FruitInit(int tempCounter) {
-    if (fruitSwitch && tempCounter == FRUIT_DELAY) {
+    if (tempCounter == FRUIT_DELAY) {
         srand((unsigned int) time(NULL));
         do {
             apple.x = rand() % (WIDE - 2) + 1;
             apple.y = rand() % (HEIGHT - 2) + 1;
         } while (IsSnake(apple.x, apple.y));
         tempCounter = 0;
+        fruitSwitch = true;
     }
+    
 }
 
 bool IsFruit(int x, int y) {
@@ -72,6 +74,7 @@ bool IsFruit(int x, int y) {
 }
 
 void BodyAdd() {
+    fruitSwitch = false;
     struct snake* tempHead = &snakeHead;
     while (tempHead->next != NULL) {
         tempHead = tempHead->next;
@@ -91,15 +94,12 @@ void BodyAdd() {
         case UP:
             newBody->y += 1;
             break;
-
         case DOWN:
             newBody->y -= 1;
             break;
-
         case LEFT:
             newBody->x += 1;
             break;
-
         case RIGHT:
             newBody->x -= 1;
             break;
@@ -108,7 +108,7 @@ void BodyAdd() {
 
 void SnakeInit() {
     struct snake* tempHead = &snakeHead;
-    while (tempHead->next!= NULL) {
+    while (tempHead->next != NULL) {
         tempHead = tempHead->next;
     }
     while (tempHead->head != NULL) {
@@ -175,9 +175,9 @@ bool PrintGame() {
     snakeBodyC.head = &snakeBodyB;
 
     while (1) {
-        printf("%d\n%d\n%d\n%d\n", apple.x, apple.y, counter, len);
         FruitInit(counter);
         for (int mapY = 0; mapY < HEIGHT; mapY++) {
+            printf("\t\t\t");
             for (int mapX = 0; mapX < WIDE; mapX++) {
                 if (mapY == 0 || mapY == HEIGHT - 1)
                     printf("□");
@@ -192,7 +192,7 @@ bool PrintGame() {
             }
             printf("\n");
         }
-        
+
         if (IsEnd()) {
             system("cls");
             printf("游戏结束！\n");
@@ -200,10 +200,10 @@ bool PrintGame() {
         }
         if (IsEat()) {
             BodyAdd();
-            fruitSwitch = false;
         }
         SnakeInit();
         GetDirection();
+        printf("\t\t\t分数：%d", len - 4);
         system("cls");
         ++counter;
     }
