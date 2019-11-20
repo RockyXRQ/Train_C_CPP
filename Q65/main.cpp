@@ -24,8 +24,11 @@ struct food {
     int x = WIDE / 3;
     int y = HEIGHT / 3;
 };
+struct snake snakeBodyC = {UP, WIDE / 2, HEIGHT / 2 - 3, NULL};
+struct snake snakeBodyB = {UP, WIDE / 2, HEIGHT / 2 - 2, &snakeBodyC};
+struct snake snakeBodyA = {UP, WIDE / 2, HEIGHT / 2 - 1, &snakeBodyB};
+struct snake snakeHead = {UP, WIDE / 2, HEIGHT / 2, &snakeBodyA};
 
-struct snake snakeHead;
 struct food apple;
 static int counter = 0;
 static int len = 1;
@@ -52,7 +55,7 @@ void FruitInit(int tempCounter) {
         do {
             apple.x = rand() % (WIDE - 3) + 1;
             apple.y = rand() % (HEIGHT - 3) + 1;
-        } while (!IsSnake(apple.x, apple.y));
+        } while (IsSnake(apple.x, apple.y));
     }
 }
 
@@ -81,11 +84,12 @@ void BodyAdd() {
 void SnakeInit() {
     struct snake* tempHead = &snakeHead;
     struct snake tempBodyA;
-    
-    while (tempHead->next != NULL && tempHead->next->next != NULL) {
-        
-    }
+    struct snake tempBodyB;
 
+    while () {
+        //@todo: Add value passing for linkedList
+    }
+    
     tempHead = &snakeHead;
     while (tempHead != NULL) {
         switch (tempHead->direction) {
@@ -126,10 +130,14 @@ bool IsEnd() {
 
 void GetDirection() {
     for (int sec = 0; sec < DELAY; sec++) {
-        if (GetKeyState(VK_UP) < 0) snakeHead.direction = UP;
-        if (GetKeyState(VK_DOWN) < 0) snakeHead.direction = DOWN;
-        if (GetKeyState(VK_LEFT) < 0) snakeHead.direction = LEFT;
-        if (GetKeyState(VK_RIGHT) < 0) snakeHead.direction = RIGHT;
+        if (GetKeyState(VK_UP) < 0 && snakeHead.direction!=DOWN)
+            snakeHead.direction = UP;
+        if (GetKeyState(VK_DOWN) < 0 && snakeHead.direction != UP)
+            snakeHead.direction = DOWN;
+        if (GetKeyState(VK_LEFT) < 0 && snakeHead.direction != RIGHT)
+            snakeHead.direction = LEFT;
+        if (GetKeyState(VK_RIGHT) < 0 && snakeHead.direction != LEFT)
+            snakeHead.direction = RIGHT;
         Sleep(1);
     }
 }

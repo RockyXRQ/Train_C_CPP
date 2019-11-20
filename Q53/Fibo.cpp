@@ -20,4 +20,3 @@ int FbncPrint(int n) {
         return FbncPrint(n - 1) + FbncPrint(n - 2);
     }
 }
-
