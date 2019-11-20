@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+#include <time.h>
 
 const int WIDE = 30;
 const int HEIGHT = 30;
@@ -19,8 +20,8 @@ struct snake {
 };
 
 struct food {
-    int x = 0;
-    int y = 0;
+    int x = WIDE / 3;
+    int y = HEIGHT / 3;
 };
 
 struct snake snakeHead;
@@ -42,6 +43,21 @@ bool IsSnake(int x, int y) {
         tempHead = tempHead->next;
     }
     return false;
+}
+
+void FruitInit() {
+    srand((unsigned int) time(NULL));
+    do {
+        apple.x = rand() % (WIDE - 3) + 1;
+        apple.y = rand() % (HEIGHT - 3) + 1;
+    } while (!IsSnake(apple.x, apple.y));
+}
+
+bool IsFruit(int x, int y) {
+    if (x == apple.x && y == apple.y)
+        return true;
+    else
+        return false;
 }
 
 void BodyAdd() {
@@ -72,19 +88,19 @@ void SnakeInit() {
     while (tempHead != NULL) {
         switch (tempHead->direction) {
             case UP:
-                if (tempHead->y > 1) tempHead->y -= 1;
+                if (tempHead->y > 0) tempHead->y -= 1;
                 break;
 
             case DOWN:
-                if (tempHead->y < HEIGHT - 2) tempHead->y += 1;
+                if (tempHead->y < HEIGHT - 1) tempHead->y += 1;
                 break;
 
             case LEFT:
-                if (tempHead->x > 1) tempHead->x -= 1;
+                if (tempHead->x > 0) tempHead->x -= 1;
                 break;
 
             case RIGHT:
-                if (tempHead->x < WIDE - 2) tempHead->x += 1;
+                if (tempHead->x < WIDE - 1) tempHead->x += 1;
                 break;
             default:
                 break;
@@ -99,6 +115,9 @@ bool IsEnd() {
             return true;
         tempHead = tempHead->next;
     }
+    if (snakeHead.x == 0 || snakeHead.x == WIDE - 1 || snakeHead.y == 0 ||
+        snakeHead.y == HEIGHT - 1)
+        return true;
     return false;
 }
 
@@ -114,7 +133,7 @@ void GetDirection() {
 
 bool PrintGame() {
     while (1) {
-        // printf("%d %d\n", snakeHead.x, snakeHead.y);
+        FruitInit();
         for (int mapY = 0; mapY < HEIGHT; mapY++) {
             for (int mapX = 0; mapX < WIDE; mapX++) {
                 if (mapY == 0 || mapY == HEIGHT - 1)
@@ -123,6 +142,8 @@ bool PrintGame() {
                     printf("¡õ");
                 else if (IsSnake(mapX, mapY))
                     printf("¡ö");
+                else if (IsFruit(mapX, mapY))
+                    printf("?");
                 else
                     printf("  ");
             }
