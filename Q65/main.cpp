@@ -13,25 +13,29 @@ const int LEFT = 75;
 const int RIGHT = 77;
 const int DELAY = 0.03 * 1000;
 
+int lastDirection = UP;
+
 struct snake {
     int direction = UP;
     int x = WIDE / 2;
     int y = HEIGHT / 2;
+    struct snake* head = NULL;
     struct snake* next = NULL;
 };
 
 struct food {
-    int x = WIDE / 3;
-    int y = HEIGHT / 3;
+    int x = 0;
+    int y = 0;
 };
-struct snake snakeBodyC = {UP, WIDE / 2, HEIGHT / 2 - 3, NULL};
-struct snake snakeBodyB = {UP, WIDE / 2, HEIGHT / 2 - 2, &snakeBodyC};
-struct snake snakeBodyA = {UP, WIDE / 2, HEIGHT / 2 - 1, &snakeBodyB};
-struct snake snakeHead = {UP, WIDE / 2, HEIGHT / 2, &snakeBodyA};
+struct snake snakeBodyC = {UP, WIDE / 2, HEIGHT / 2 + 3, NULL, NULL};
+struct snake snakeBodyB = {UP, WIDE / 2, HEIGHT / 2 + 2, NULL, &snakeBodyC};
+struct snake snakeBodyA = {UP, WIDE / 2, HEIGHT / 2 + 1, NULL, &snakeBodyB};
+struct snake snakeHead = {UP, WIDE / 2, HEIGHT / 2, NULL, &snakeBodyA};
 
 struct food apple;
 static int counter = 0;
-static int len = 1;
+static int len = 4;
+bool fruitSwitch = true;
 
 bool IsEat() {
     if (snakeHead.x == apple.x && snakeHead.y == apple.y)
@@ -50,12 +54,13 @@ bool IsSnake(int x, int y) {
 }
 
 void FruitInit(int tempCounter) {
-    if (tempCounter == FRUIT_DELAY) {
+    if (fruitSwitch && tempCounter == FRUIT_DELAY) {
         srand((unsigned int) time(NULL));
         do {
-            apple.x = rand() % (WIDE - 3) + 1;
-            apple.y = rand() % (HEIGHT - 3) + 1;
+            apple.x = rand() % (WIDE - 2) + 1;
+            apple.y = rand() % (HEIGHT - 2) + 1;
         } while (IsSnake(apple.x, apple.y));
+        tempCounter = 0;
     }
 }
 
@@ -73,23 +78,44 @@ void BodyAdd() {
     }
     struct snake* newBody = (struct snake*) malloc(sizeof(struct snake));
     tempHead->next = newBody;
+    newBody->head = tempHead;
     newBody->x = tempHead->x;
     newBody->y = tempHead->y;
+    newBody->direction = tempHead->direction;
+    newBody->next = NULL;
     ++len;
     apple.x = 0;
     apple.y = 0;
     counter = 0;
+    switch (newBody->direction) {
+        case UP:
+            newBody->y += 1;
+            break;
+
+        case DOWN:
+            newBody->y -= 1;
+            break;
+
+        case LEFT:
+            newBody->x += 1;
+            break;
+
+        case RIGHT:
+            newBody->x -= 1;
+            break;
+    }
 }
 
 void SnakeInit() {
     struct snake* tempHead = &snakeHead;
-    struct snake tempBodyA;
-    struct snake tempBodyB;
-
-    while () {
-        //@todo: Add value passing for linkedList
+    while (tempHead->next!= NULL) {
+        tempHead = tempHead->next;
     }
-    
+    while (tempHead->head != NULL) {
+        tempHead->direction = tempHead->head->direction;
+        tempHead = tempHead->head;
+    }
+    snakeHead.next->direction = lastDirection;
     tempHead = &snakeHead;
     while (tempHead != NULL) {
         switch (tempHead->direction) {
@@ -113,6 +139,7 @@ void SnakeInit() {
         }
         tempHead = tempHead->next;
     }
+    lastDirection = snakeHead.direction;
 }
 bool IsEnd() {
     struct snake* tempHead = snakeHead.next;
@@ -130,7 +157,7 @@ bool IsEnd() {
 
 void GetDirection() {
     for (int sec = 0; sec < DELAY; sec++) {
-        if (GetKeyState(VK_UP) < 0 && snakeHead.direction!=DOWN)
+        if (GetKeyState(VK_UP) < 0 && snakeHead.direction != DOWN)
             snakeHead.direction = UP;
         if (GetKeyState(VK_DOWN) < 0 && snakeHead.direction != UP)
             snakeHead.direction = DOWN;
@@ -143,6 +170,10 @@ void GetDirection() {
 }
 
 bool PrintGame() {
+    snakeBodyA.head = &snakeHead;
+    snakeBodyB.head = &snakeBodyA;
+    snakeBodyC.head = &snakeBodyB;
+
     while (1) {
         printf("%d\n%d\n%d\n%d\n", apple.x, apple.y, counter, len);
         FruitInit(counter);
@@ -154,19 +185,23 @@ bool PrintGame() {
                     printf("¡õ");
                 else if (IsSnake(mapX, mapY))
                     printf("¡ö");
-                else if (counter == FRUIT_DELAY && IsFruit(mapX, mapY)) {
+                else if (fruitSwitch && IsFruit(mapX, mapY))
                     printf("¡ñ");
-                } else
+                else
                     printf("  ");
             }
             printf("\n");
         }
+        
         if (IsEnd()) {
             system("cls");
             printf("ÓÎÏ·½áÊø£¡\n");
             return 1;
         }
-        if (IsEat()) BodyAdd();
+        if (IsEat()) {
+            BodyAdd();
+            fruitSwitch = false;
+        }
         SnakeInit();
         GetDirection();
         system("cls");
