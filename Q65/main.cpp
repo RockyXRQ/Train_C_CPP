@@ -69,6 +69,7 @@ void BodyAdd() {
         tempHead = tempHead->next;
     }
     struct snake* newBody = (struct snake*) malloc(sizeof(struct snake));
+    tempHead->next = newBody;
     newBody->x = tempHead->x;
     newBody->y = tempHead->y;
     ++len;
@@ -79,15 +80,10 @@ void BodyAdd() {
 
 void SnakeInit() {
     struct snake* tempHead = &snakeHead;
-    struct snake* tempBodyA;
-    struct snake* tempBodyB;
-
+    struct snake tempBodyA;
+    
     while (tempHead->next != NULL && tempHead->next->next != NULL) {
-        tempBodyA->direction = tempHead->next->direction;
-        tempHead->next->direction = tempHead->direction;
-        tempHead = tempHead->next;
-        tempBodyB->direction = tempHead->next->direction;
-        tempHead->next->direction = tempBodyA->direction;
+        
     }
 
     tempHead = &snakeHead;
