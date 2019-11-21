@@ -11,7 +11,7 @@ const int UP = 80;
 const int DOWN = 72;
 const int LEFT = 75;
 const int RIGHT = 77;
-const int DELAY = 0.015 * 1000;
+const int DELAY = 0.016 * 1000;
 
 int lastDirection = UP;
 
