@@ -3,15 +3,15 @@
 #include <windows.h>
 #include <time.h>
 
-const int WIDE = 20;
-const int HEIGHT = 20;
+const int WIDE = 18;
+const int HEIGHT = 18;
 const int FRUIT_DELAY = 8;
 
 const int UP = 80;
 const int DOWN = 72;
 const int LEFT = 75;
 const int RIGHT = 77;
-const int DELAY = 0.016 * 1000;
+const int DELAY = 0.02 * 1000;
 
 int lastDirection = UP;
 
@@ -175,7 +175,7 @@ bool PrintGame() {
     while (1) {
         FruitInit(counter);
         for (int mapY = 0; mapY < HEIGHT; mapY++) {
-            printf("\t\t\t");
+            printf("");
             for (int mapX = 0; mapX < WIDE; mapX++) {
                 if (mapY == 0 || mapY == HEIGHT - 1)
                     printf("·");
@@ -201,7 +201,7 @@ bool PrintGame() {
         }
         SnakeInit();
         GetDirection();
-        printf("\t\t\t分数：%d", len - 3);
+        printf("分数：%d", len - 3);
         system("cls");
         ++counter;
     }
