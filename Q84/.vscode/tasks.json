@@ -6,7 +6,7 @@
         {
             "type": "shell",
             "label": "g++", 
-            "command": "D:\\Software\\MinGW\\bin\\g++.exe",
+            "command": "D:\\Software\\MinGW\\bin\\gcc.exe",
             "args": [
                 "-g",
                 "${file}",
