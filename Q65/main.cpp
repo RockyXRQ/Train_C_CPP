@@ -62,7 +62,6 @@ void FruitInit(int tempCounter) {
         tempCounter = 0;
         fruitSwitch = true;
     }
-    
 }
 
 bool IsFruit(int x, int y) {
